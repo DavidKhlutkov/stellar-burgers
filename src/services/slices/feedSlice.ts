@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getFeedsApi, getOrdersApi } from '@api';
+import { getFeedsApi, getOrderByNumberApi } from '@api';
 import { TOrder } from '@utils-types';
 import { error } from 'console';
 
@@ -21,19 +21,18 @@ const initialState: IFeedState = {
 
 export const getFeeds = createAsyncThunk('feed/getFeeds', getFeedsApi);
 
-export const getOrders = createAsyncThunk('feed/getOrders', getOrdersApi);
+export const getOrdersNumber = createAsyncThunk(
+  'feed/getOrders',
+  getOrderByNumberApi
+);
 
 export const feedSlice = createSlice({
   name: 'feed',
   initialState,
   reducers: {},
   selectors: {
-    getFeedSelectors(state) {
-      return state;
-    },
-    getOrdersSelectors(state) {
-      return state.orders;
-    }
+    getFeedSelectors: (state) => state,
+    getOrdersSelectors: (state) => state.orders
   },
   extraReducers: (builder) => {
     builder
@@ -48,22 +47,22 @@ export const feedSlice = createSlice({
         state.totalToday = action.payload.totalToday;
         state.error = null;
       })
-      .addCase(getFeeds.rejected, (state) => {
+      .addCase(getFeeds.rejected, (state, action) => {
         state.isLoading = false;
-        // state.error = error.message;
+        state.error = action.error.message as string;
       })
-      .addCase(getOrders.pending, (state) => {
+      .addCase(getOrdersNumber.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(getOrders.fulfilled, (state, action) => {
-        state.orders = action.payload;
+      .addCase(getOrdersNumber.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.orders = action.payload.orders;
         state.error = null;
       })
-      .addCase(getOrders.rejected, (state) => {
+      .addCase(getOrdersNumber.rejected, (state, action) => {
         state.isLoading = false;
-        // state.error = error.message;
+        state.error = action.error.message as string;
       });
   }
 });

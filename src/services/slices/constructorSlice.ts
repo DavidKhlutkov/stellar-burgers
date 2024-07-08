@@ -92,15 +92,15 @@ export const constructorSlice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(submitOrder.rejected, (state, { error }) => {
+      .addCase(submitOrder.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = error.message as string;
+        state.error = action.error.message as string;
       })
-      .addCase(submitOrder.fulfilled, (state, { payload }) => {
+      .addCase(submitOrder.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         state.orderRequest = false;
-        state.orderModalData = payload.order;
+        state.orderModalData = action.payload.order;
         state.constructorItems = {
           bun: null,
           ingredients: []

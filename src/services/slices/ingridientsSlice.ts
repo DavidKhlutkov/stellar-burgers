@@ -6,6 +6,7 @@ export interface IIngridientsState {
   ingredient: TIngredient;
   ingredients: TIngredient[];
   isLoading: boolean;
+  error: string | null;
 }
 
 const initialState: IIngridientsState = {
@@ -23,7 +24,8 @@ const initialState: IIngridientsState = {
     image_large: ''
   },
   ingredients: [],
-  isLoading: false
+  isLoading: false,
+  error: null
 };
 
 export const getIngredients = createAsyncThunk(
@@ -46,13 +48,16 @@ export const ingredientsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getIngredients.pending, (state) => {
       state.isLoading = true;
+      state.error = null;
     });
     builder.addCase(getIngredients.fulfilled, (state, action) => {
       state.isLoading = false;
       state.ingredients = action.payload;
+      state.error = null;
     });
-    builder.addCase(getIngredients.rejected, (state) => {
+    builder.addCase(getIngredients.rejected, (state, action) => {
       state.isLoading = false;
+      state.error = action.error.message as string;
     });
   }
 });

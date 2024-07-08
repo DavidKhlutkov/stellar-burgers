@@ -5,17 +5,17 @@ import { TIngredient } from '@utils-types';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from '../../services/store';
 import {
-  getOrders,
+  getOrdersNumber,
   getOrdersSelectors,
   getIngredientsSelectors
 } from '@slices';
 
 export const OrderInfo: FC = () => {
   const dispatch = useDispatch();
-  const orderNubmer = Number(useParams().number);
+  const orderNubmer: number = Number(useParams().number);
 
   useEffect(() => {
-    dispatch(getOrders(orderNubmer));
+    dispatch(getOrdersNumber(orderNubmer));
   }, [dispatch]);
 
   const orderData = useSelector(getOrdersSelectors);
