@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { getFeedsApi, getOrderByNumberApi } from '@api';
 import { TOrder } from '@utils-types';
-import { error } from 'console';
 
 export interface IFeedState {
   orders: TOrder[];

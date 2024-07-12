@@ -17,8 +17,7 @@ export const OrderInfo: FC = () => {
   useEffect(() => {
     dispatch(getOrdersNumber(orderNubmer));
   }, [dispatch]);
-
-  const orderData = useSelector(getOrdersSelectors);
+  const [orderData] = useSelector(getOrdersSelectors);
 
   const ingredients: TIngredient[] = useSelector(getIngredientsSelectors);
 
@@ -32,7 +31,7 @@ export const OrderInfo: FC = () => {
       [key: string]: TIngredient & { count: number };
     };
 
-    const ingredientsInfo = orderData.ingredients.reduce(
+    const ingredientsInfo = orderData?.ingredients.reduce(
       (acc: TIngredientsWithCount, item) => {
         if (!acc[item]) {
           const ingredient = ingredients.find((ing) => ing._id === item);

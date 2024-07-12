@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import ingredientsReducer from './slices/ingridientsSlice';
 import constructorReducer from './slices/constructorSlice';
 import feedReducer from './slices/feedSlice';
+import userInfoReducer from './slices/userInfoSlice';
 import {
   TypedUseSelectorHook,
   useDispatch as dispatchHook,
@@ -10,7 +11,8 @@ import {
 
 const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
-  constructor: constructorReducer,
+  construct: constructorReducer,
+  userInfo: userInfoReducer,
   feed: feedReducer
 }); // подключаем слайсы
 
