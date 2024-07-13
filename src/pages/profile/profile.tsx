@@ -7,11 +7,11 @@ import { TUser } from '@utils-types';
 export const Profile: FC = () => {
   /** TODO: взять переменную из стора */
   const dispatch = useDispatch();
-  const user = useSelector((state) => getUserSelectors(state.userInfo));
+  const user = useSelector((state) => state.userInfo.user) as TUser;
 
   const [formValue, setFormValue] = useState({
-    name: user.name,
-    email: user.email,
+    name: user?.name || '',
+    email: user?.email || '',
     password: ''
   });
 

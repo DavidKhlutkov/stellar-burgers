@@ -9,6 +9,7 @@ import {
   resetPasswordApi
 } from '@api';
 import { TUser } from '@utils-types';
+import { setCookie } from '../../utils/cookie';
 
 export interface IUserInfoState {
   user: TUser | null;
@@ -105,6 +106,8 @@ export const userInfoSlice = createSlice({
         state.user = action.payload.user;
         state.isAuthrized = true;
         state.error = null;
+        localStorage.setItem('refreshToken', action.payload.refreshToken);
+        setCookie('accessToken', action.payload.accessToken);
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;

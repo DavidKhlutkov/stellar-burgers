@@ -39,15 +39,39 @@ export const BurgerIngredients: FC = () => {
     threshold: 0
   });
 
+  // useEffect(() => {
+  //   if (inViewBuns) {
+  //     setCurrentTab('bun');
+  //   } else if (inViewSauces) {
+  //     setCurrentTab('sauce');
+  //   } else if (inViewFilling) {
+  //     setCurrentTab('main');
+  //   }
+  // }, [inViewBuns, inViewFilling, inViewSauces]);
+
   useEffect(() => {
-    if (inViewBuns) {
-      setCurrentTab('bun');
-    } else if (inViewSauces) {
-      setCurrentTab('sauce');
-    } else if (inViewFilling) {
-      setCurrentTab('main');
-    }
-  }, [inViewBuns, inViewFilling, inViewSauces]);
+    const onSwitchTab = (e: any) => {
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        if (currentTab === 'bun') {
+          setCurrentTab('main');
+          titleMainRef.current?.scrollIntoView({ behavior: 'smooth' });
+        }
+        if (currentTab === 'main') {
+          setCurrentTab('sauce');
+          titleSaucesRef.current?.scrollIntoView({ behavior: 'smooth' });
+        }
+        if (currentTab === 'sauce') {
+          setCurrentTab('bun');
+          titleBunRef.current?.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    };
+    document.addEventListener('keydown', onSwitchTab);
+    return () => {
+      document.removeEventListener('keydown', onSwitchTab);
+    };
+  }, [currentTab]);
 
   const onTabClick = (tab: string) => {
     setCurrentTab(tab as TTabMode);
