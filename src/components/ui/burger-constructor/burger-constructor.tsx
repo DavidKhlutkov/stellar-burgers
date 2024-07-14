@@ -20,14 +20,14 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
 }) => (
   <>
     <section className={styles.burger_constructor}>
-      {constructorItems?.bun ? (
+      {constructorItems.bun ? (
         <div className={`${styles.element} mb-4 mr-4`}>
           <ConstructorElement
             type='top'
             isLocked
-            text={`${constructorItems?.bun?.name} (верх)`}
-            price={constructorItems?.bun?.price}
-            thumbnail={constructorItems?.bun?.image}
+            text={`${constructorItems.bun.name} (верх)`}
+            price={constructorItems.bun.price}
+            thumbnail={constructorItems.bun.image}
           />
         </div>
       ) : (
@@ -38,8 +38,8 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
         </div>
       )}
       <ul className={styles.elements}>
-        {constructorItems?.ingredients?.length > 0 ? (
-          constructorItems?.ingredients?.map(
+        {constructorItems.ingredients.length > 0 ? (
+          constructorItems.ingredients.map(
             (item: TConstructorIngredient, index: number) => (
               <BurgerConstructorElement
                 ingredient={item}
@@ -62,9 +62,9 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
           <ConstructorElement
             type='bottom'
             isLocked
-            text={`${constructorItems?.bun?.name} (низ)`}
-            price={constructorItems?.bun?.price}
-            thumbnail={constructorItems?.bun?.image}
+            text={`${constructorItems.bun.name} (низ)`}
+            price={constructorItems.bun.price}
+            thumbnail={constructorItems.bun.image}
           />
         </div>
       ) : (

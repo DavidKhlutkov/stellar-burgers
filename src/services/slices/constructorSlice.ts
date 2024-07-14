@@ -44,7 +44,7 @@ export const constructorSlice = createSlice({
     ) => {
       state.constructorItems.ingredients =
         state.constructorItems.ingredients.filter(
-          (item) => item._id !== action.payload._id
+          (item) => item.cart_id !== action.payload.cart_id
         );
     },
     moveDownIngridient: (
@@ -73,16 +73,22 @@ export const constructorSlice = createSlice({
         state.constructorItems.ingredients[currentIndex - 1] = action.payload;
       }
     },
-    addIngridient: (state, action: PayloadAction<TConstructorIngredient>) => {
-      const data = {
-        cart_id: nanoid(),
-        ...action.payload
-      };
-      if (action.payload.type === 'bun') {
-        state.constructorItems.bun = data;
-        return;
+    addIngridient: {
+      reducer: (
+        state,
+        action: PayloadAction<TConstructorIngredient & { cart_id: string }>
+      ) => {
+        const data = action.payload;
+        if (data.type === 'bun') {
+          state.constructorItems.bun = data;
+          return;
+        }
+        state.constructorItems.ingredients.push(data);
+      },
+      prepare: (ingredient: TConstructorIngredient) => {
+        const cart_id = nanoid();
+        return { payload: { ...ingredient, cart_id } };
       }
-      state.constructorItems.ingredients.push(data);
     }
   },
   selectors: {

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, FC, useMemo } from 'react';
+import { useState, useRef, useEffect, FC, useMemo, KeyboardEvent } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import { TTabMode } from '@utils-types';
@@ -50,7 +50,7 @@ export const BurgerIngredients: FC = () => {
   // }, [inViewBuns, inViewFilling, inViewSauces]);
 
   useEffect(() => {
-    const onSwitchTab = (e: any) => {
+    const onSwitchTab = (e: KeyboardEvent) => {
       if (e.key === 'Tab') {
         e.preventDefault();
         if (currentTab === 'bun') {
@@ -67,9 +67,9 @@ export const BurgerIngredients: FC = () => {
         }
       }
     };
-    document.addEventListener('keydown', onSwitchTab);
+    document.addEventListener('keydown', onSwitchTab as () => void);
     return () => {
-      document.removeEventListener('keydown', onSwitchTab);
+      document.removeEventListener('keydown', onSwitchTab as () => void);
     };
   }, [currentTab]);
 
