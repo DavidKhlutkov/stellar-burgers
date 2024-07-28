@@ -7,7 +7,6 @@ import { useSelector } from '../../services/store';
 import { getIngredientsSelectors } from '@slices';
 
 export const BurgerIngredients: FC = () => {
-  /** TODO: взять переменные из стора */
   const ingredients = useSelector(getIngredientsSelectors);
   const buns = useMemo(
     () => ingredients.filter((ing) => ing.type === 'bun'),

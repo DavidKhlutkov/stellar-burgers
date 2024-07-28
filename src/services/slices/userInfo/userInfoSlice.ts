@@ -9,7 +9,7 @@ import {
   resetPasswordApi
 } from '@api';
 import { TUser } from '@utils-types';
-import { setCookie } from '../../utils/cookie';
+import { setCookie } from '../../../utils/cookie';
 
 export interface IUserInfoState {
   user: TUser | null;
