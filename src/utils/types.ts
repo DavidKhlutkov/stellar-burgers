@@ -13,7 +13,7 @@ export type TIngredient = {
 };
 
 export type TConstructorIngredient = TIngredient & {
-  id: string;
+  cart_id?: string;
 };
 
 export type TOrder = {
