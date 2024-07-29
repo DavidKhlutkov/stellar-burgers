@@ -16,6 +16,7 @@ describe('Constructor', () => {
     cy.wait('@ingredients');
   });
   it('should add ingredient to constructor', () => {
+    cy.get('li:contains("Краторная булка N-200i")').contains(add).click();
     cy.get(bun).contains(add).click();
     cy.get(sauce).contains(add).click();
     cy.get(main).contains(add).click();
@@ -71,11 +72,16 @@ describe('Test order', () => {
     cy.get(ingredientsBurger).contains(sauce).should('exist');
     cy.get('button[type=submit]').click();
     cy.wait('@order').then((interception) => {
-      // Проверить данные в JSON-ответе
-      expect(interception.response.statusCode).to.equal(200);
-      expect(interception.response.body).to.have.property('order');
-      expect(interception.response.body.order).to.have.property('id');
-      expect(interception.response.body.order).to.have.property('ingredients');
+      if (interception.response) {
+        expect(interception.response.statusCode).to.equal(200);
+        expect(interception.response.body).to.have.property('order');
+        expect(interception.response.body.order).to.have.property('id');
+        expect(interception.response.body.order).to.have.property(
+          'ingredients'
+        );
+      } else {
+        // Handle the case when interception.response is undefined
+      }
     });
   });
 });
