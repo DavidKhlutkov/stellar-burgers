@@ -40,10 +40,10 @@ describe('Test modal', () => {
   });
   it('should open modal', () => {
     cy.contains(ditals).should('not.exist');
-    cy.contains('Биокотлета из марсианской Магнолии').click();
+    cy.contains('Мясо бессмертных моллюсков Protostomia').click();
   });
   it('should close modal', () => {
-    cy.contains('Биокотлета из марсианской Магнолии').click();
+    cy.contains('Мясо бессмертных моллюсков Protostomia').click();
     cy.contains(ditals).should('exist');
     cy.get(closeModal).click();
     cy.contains(ditals).should('not.exist');
