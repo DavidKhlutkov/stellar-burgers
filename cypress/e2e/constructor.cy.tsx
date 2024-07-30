@@ -16,11 +16,16 @@ describe('Constructor', () => {
     cy.wait('@ingredients');
   });
   it('should add ingredient to constructor', () => {
-    cy.get('li:contains("Краторная булка N-200i")').contains(add).click();
-    cy.get(bun).contains(add).click();
-    cy.get(sauce).contains(add).click();
-    cy.get(main).contains(add).click();
-    cy.get(ingredientsBurger).contains(bun).should('exist');
+    cy.get('li:contains("Краторная булка N-200i")').within(() => {
+      cy.get('button:contains(Добавить)').click();
+    });
+    cy.get(`li:contains(${sauce})`).within(() => {
+      cy.get('button:contains(Добавить)').click();
+    });
+    cy.get(`li:contains(${main})`).within(() => {
+      cy.get('button:contains(Добавить)').click();
+    });
+    cy.get('constructor-element_pos_top').contains(bun).should('exist');
     cy.get(ingredientsBurger).contains(sauce).should('exist');
     cy.get(ingredientsBurger).contains(main).should('exist');
   });
@@ -32,7 +37,6 @@ describe('Test modal', () => {
       'ingredients'
     );
     cy.visit('/');
-    cy.wait('@ingredients');
   });
   it('should open modal', () => {
     cy.contains(ditals).should('not.exist');
