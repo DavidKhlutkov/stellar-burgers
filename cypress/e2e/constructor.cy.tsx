@@ -73,7 +73,7 @@ describe('Test order', () => {
     cy.get(bun).contains(add).click();
     cy.get(sauce).contains(add).click();
     cy.get(main).contains(add).click();
-    cy.get(ingredientsBurger).contains(bun).should('exist');
+    cy.get(burgerConstructor).contains(bun).should('exist');
     cy.get(ingredientsBurger).contains(main).should('exist');
     cy.get(ingredientsBurger).contains(sauce).should('exist');
     cy.get('button[type=submit]').click();
