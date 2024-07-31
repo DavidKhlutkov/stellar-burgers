@@ -4,6 +4,8 @@ const sauce = 'Соус Spicy-X';
 const main = 'Мясо бессмертных моллюсков Protostomia';
 const closeModal = '[data-cy=modal-close-button]';
 const submit = '[data-cy=order-submit]';
+const burgerConstructorElement = '[data-cy=burger-constructor-element]';
+const burgerConstructor = '[data-cy=burger-constructor]';
 const add = 'Добавить';
 const ditals = 'Детали ингредиента';
 
@@ -25,7 +27,7 @@ describe('Constructor', () => {
     cy.get(`li:contains(${main})`).within(() => {
       cy.get('button:contains(Добавить)').click();
     });
-    cy.get('constructor-element_pos_top').contains(bun).should('exist');
+    cy.get(burgerConstructor).contains(bun).should('exist');
     cy.get(ingredientsBurger).contains(sauce).should('exist');
     cy.get(ingredientsBurger).contains(main).should('exist');
   });
