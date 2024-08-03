@@ -19,7 +19,7 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
   closeOrderModal
 }) => (
   <>
-    <section className={styles.burger_constructor}>
+    <section data-cy='burger-constructor' className={styles.burger_constructor}>
       {constructorItems.bun ? (
         <div className={`${styles.element} mb-4 mr-4`}>
           <ConstructorElement
@@ -37,7 +37,7 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
           Выберите булки
         </div>
       )}
-      <ul className={styles.elements}>
+      <ul data-cy='burger-ingredients' className={styles.elements}>
         {constructorItems.ingredients.length > 0 ? (
           constructorItems.ingredients.map(
             (item: TConstructorIngredient, index: number) => (

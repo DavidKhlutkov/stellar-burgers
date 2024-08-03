@@ -15,7 +15,7 @@ import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { AppHeader, Modal, OrderInfo, IngredientDetails } from '@components';
 import { useEffect } from 'react';
 import store, { useDispatch, useSelector } from '../../services/store';
-import { getIngredients } from '../../services/slices/ingridientsSlice';
+import { getIngredients } from '../../services/slices/ingridientSlice/ingridientsSlice';
 import { ProtectedRoute } from '../protecktedRouter/';
 import { ProtectedAuthRoute } from '../protecktedRouter/';
 
